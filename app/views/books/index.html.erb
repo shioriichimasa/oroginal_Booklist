@@ -1,0 +1,25 @@
+<!--登録した本の一覧表示画面のView-->
+<h1>読んだ本一覧</h1>
+<!--検索フォーム-->
+<%= search_form_for @q, url: search_books_path do |f| %>
+  タイトル名で検索：
+  <%= f.search_field :title_cont %>
+  <%= f.submit '検索' %>
+<% end %>
+
+<ul>
+  <!--登録した全ての本から1つづつ取り出す-->
+  <% @books.each do |book| %>
+    </h3><%= link_to book.id, book %></h3>
+    <li><%= book.title %></li>
+    <li><%= book.author %></li>
+    <li><%= book.review %></li>
+    <br>
+  <% end %>
+</ul>
+<%= link_to '読んだ本を登録する', new_book_path %>
+
+
+
+
+  

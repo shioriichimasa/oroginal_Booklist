@@ -1,0 +1,20 @@
+<!--検索結果の表示画面-->
+<h1>検索結果</h1>
+ 
+  <!--検索結果から1つづつ取り出す-->
+  <% if @results.length != 0 %>
+  <% @results.each do |book| %>
+  <ul>
+    </h3><%= link_to book.id, book %></h3>
+    <li><%= book.title %></li>
+    <li><%= book.author %></li>
+    <li><%= book.review %></li>
+  </ul>
+    <br>
+  <% end %>
+  <% else %>
+  検索結果はありません
+  <br>
+<% end %>
+
+<%= link_to '一覧に戻る', books_path %>

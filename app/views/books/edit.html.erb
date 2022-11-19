@@ -1,0 +1,16 @@
+<h1>id: <%= @book.id %> の内容編集画面</h1>
+
+<%= form_with(model: @book) do |f| %>
+  <%= f.label :title, 'タイトル' %>
+  <%= f.text_field :title %>
+  
+  <%= f.label :author, '作者' %>
+  <%= f.text_field :author %>
+
+  <%= f.label :review, '感想' %>
+  <%= f.text_field :review %>
+
+  <%= f.submit '登録' %>
+<% end %>
+
+<%= link_to '一覧に戻る', books_path %>
