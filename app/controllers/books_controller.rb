@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  # 共通処理の適用
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  
   # 検索機能：privateに設定した検索に関するメソッドを呼び出す
   before_action :set_q, only: [:index, :search]
   
@@ -12,8 +15,6 @@ class BooksController < ApplicationController
 
   # 特定idの本の詳細画面
   def show
-    # ある特定idの本のため、変数はbookという単数形
-    @book = Book.find(params[:id])
   end
 
   # 本の新規登録画面
@@ -39,13 +40,10 @@ class BooksController < ApplicationController
 
   # 登録した本情報の編集
   def edit
-    @book = Book.find(params[:id])
   end
 
   # 編集後のアップデートアクション
   def update
-    @book = Book.find(params[:id])
-
     if @book.update(book_params)
       flash[:success] = 'Book は正常に更新されました'
       redirect_to @book
@@ -57,9 +55,7 @@ class BooksController < ApplicationController
 
   # 削除の処理
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
-
     flash[:success] = 'Book は正常に削除されました'
     # indexへリダイレクト,リダイレクトの時だけ_urlになる
     redirect_to books_url
@@ -72,7 +68,15 @@ class BooksController < ApplicationController
     @results = @q.result(distinct: true)
   end
   
+  
+
   private
+  
+  # 共通処理をまとめる
+  def set_book
+    # ある特定idの本のため、変数はbookという単数形
+    @book = Book.find(params[:id])
+  end
 
   # セキュリティ対策
   # Strong Parameter
