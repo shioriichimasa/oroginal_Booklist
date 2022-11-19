@@ -1,20 +1,25 @@
 <!--検索結果の表示画面-->
 <h1>検索結果</h1>
  
+ <table class="table table-bordered">
   <!--検索結果から1つづつ取り出す-->
   <% if @results.length != 0 %>
   <% @results.each do |book| %>
-  <ul>
-    </h3><%= link_to book.id, book %></h3>
-    <li><%= book.title %></li>
-    <li><%= book.author %></li>
-    <li><%= book.review %></li>
-  </ul>
-    <br>
+  <li>id:<%= book.id %></li>
+   <tr>
+    <th class="text-center">タイトル</th><td><%= book.title %></td>
+  </tr>
+  <tr>
+    <th class="text-center">作者</th><td><%= book.author %></td>
+  </tr>
+  <tr>
+    <th class="text-center">感想</th><td><%= book.review %></td>
+  </tr>
+</table>
   <% end %>
   <% else %>
   検索結果はありません
   <br>
 <% end %>
 
-<%= link_to '一覧に戻る', books_path %>
+<%= link_to '一覧に戻る', books_path, class: 'btn btn-light'%>

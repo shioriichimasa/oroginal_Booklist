@@ -1,9 +1,17 @@
 <h1>id: <%= @book.id %> の本詳細</h1>
 
-<p>タイトル：<%= @book.title %></p>
-<p>作者　　：<%= @book.author %></p>
-<p>感想　　：<%= @book.review %></p>
+<table class="table table-bordered">
+  <tr>
+    <th class="text-center">タイトル</th><td><%= @book.title %></td>
+  </tr>
+  <tr>
+    <th class="text-center">作者</th><td><%= @book.author %></td>
+  </tr>
+  <tr>
+    <th class="text-center">感想</th><td><%= @book.review %></td>
+  </tr>
+</table>
 
-<%= link_to '一覧に戻る', books_path %>
-<%= link_to '内容を編集', edit_book_path(@book) %>
-<%= link_to '削除', @book, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<%= link_to '一覧に戻る', books_path, class: 'btn btn-light'%>
+<%= link_to '内容を編集', edit_book_path(@book), class: 'btn btn-secondary'%>
+<%= link_to '削除', @book, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger'%>
