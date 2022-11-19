@@ -10,7 +10,9 @@ class BooksController < ApplicationController
   def index
     # View側で使用するためにbooksという変数に入れている
     # 登録した全ての本のため、変数はbooksという複数形
-    @books = Book.all
+    # .order(id: :desc)はid のカラムを基準に降順になる
+    # itemsはページネーションで表示させる件数
+    @pagy, @books = pagy(Book.order(id: :desc), items:5)
   end
 
   # 特定idの本の詳細画面
