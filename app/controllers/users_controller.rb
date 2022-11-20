@@ -16,8 +16,8 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       # redirect_to @user は、 処理をusers#showのアクションへと強制的に移動させるもの
-      # ※エラーになる！ログイン画面に遷移させる必要あり
-      redirect_to @user
+      # 新規登録後はログイン画面に遷移させる必要あり
+      redirect_to login_url
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       # render :new はusers/new.html.erb を表示する

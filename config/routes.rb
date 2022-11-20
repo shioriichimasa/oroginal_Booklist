@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
   get 'users/index'
   get 'users/show'
   get 'users/new'
@@ -20,13 +23,11 @@ Rails.application.routes.draw do
   # ユーザの新規登録 URL を/signup にしている
   get 'signup', to: 'users#new'
   resources :users, only: [:create]
-end
   
   # ログイン機能のルーティング
-  # get 'signup', to: 'users#new'
-  # resources :users, only: [:create]
+  # URLの見栄えを考慮して、個別にルーティングを設定
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
-  # get 'login', to: 'sessions#new'
-  # post 'login', to: 'sessions#create'
-  # delete 'logout', to: 'sessions#destroy'
-
+end

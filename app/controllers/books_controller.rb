@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  # 事前のログイン確認
+  before_action :require_user_logged_in
+  
   # 共通処理の適用
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   
