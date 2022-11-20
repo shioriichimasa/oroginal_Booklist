@@ -6,6 +6,8 @@
   <div class="col-sm-6 offset-sm-3">
 
     <%= form_with(model: @user) do |f| %>
+    <!--エラーメッセージ表示の処理追加-->
+    <%= render 'layouts/error_messages', model: f.object %>
 
       <div class="mb-3">
         <%= f.label :name, '名前' %>
