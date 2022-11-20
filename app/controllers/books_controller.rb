@@ -2,8 +2,6 @@ class BooksController < ApplicationController
   # 事前のログイン確認
   before_action :require_user_logged_in
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
-  # 共通処理の適用
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
   # 検索機能：privateに設定した検索に関するメソッドを呼び出す
   before_action :set_q, only: [:index, :search]
   
@@ -75,12 +73,6 @@ class BooksController < ApplicationController
   
 
   private
-  
-  # 共通処理をまとめる
-  def set_book
-    # ある特定idの本のため、変数はbookという単数形
-    @book = Book.find(params[:id])
-  end
 
   # セキュリティ対策
   # Strong Parameter
