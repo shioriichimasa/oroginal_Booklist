@@ -1,10 +1,9 @@
 class BooksController < ApplicationController
   # 事前のログイン確認
   before_action :require_user_logged_in
-  
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
   # 共通処理の適用
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  
   # 検索機能：privateに設定した検索に関するメソッドを呼び出す
   before_action :set_q, only: [:index, :search]
   
@@ -30,7 +29,7 @@ class BooksController < ApplicationController
   # newから送信されるフォームの処理
   def create
     # セキュリティ対策からStrongParameterの処理を使う
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
     if @book.save
       flash[:success] = 'Book が正常に登録されました'
       # redirect_to はリンク先を指定して強制的に飛ばすメソッド
@@ -92,6 +91,14 @@ class BooksController < ApplicationController
   # 検索メソッドransack
   def set_q
     @q = Book.ransack(params[:q])
+  end
+  
+  # ログインユーザーのbookに絞る
+  def correct_user
+    @book = current_user.books.find_by(id: params[:id])
+    unless @book
+      redirect_to root_url
+    end
   end
   
 end

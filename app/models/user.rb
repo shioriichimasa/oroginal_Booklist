@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  
   # 文字をすべて小文字に変換する処理
   before_save { self.email.downcase! }
   # バリデーション
@@ -8,4 +9,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   # ログイン認証のための準備を良しなに用意してくれる
   has_secure_password
+  
+  # 一対多
+  has_many :books
 end

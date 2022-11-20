@@ -20,7 +20,7 @@
     </thead>
     <tbody>
   <!--登録した全ての本から1つづつ取り出す-->
-  <% @books.each do |book| %>
+  <% @current_user.books.each do |book| %>
   <tr>
     <td class="text-center"><%= link_to book.id, book %></td>
     <td class="text-center"><%= book.title %></td>
